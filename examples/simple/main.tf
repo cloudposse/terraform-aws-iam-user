@@ -5,16 +5,16 @@ module "assumed_roles" {
 }
 
 module "erik" {
-  source = "../../"
-  name   = "erik"
+  source  = "../../"
+  name    = "erik"
   pgp_key = "keybase:osterman"
-  groups = ["${module.assumed_roles.group_admin_name}", "${module.assumed_roles.group_readonly_name}"]
+  groups  = ["${module.assumed_roles.group_admin_name}", "${module.assumed_roles.group_readonly_name}"]
 }
 
 module "andriy" {
-  source = "../../"
-  name   = "andriy"
+  source  = "../../"
+  name    = "andriy"
   pgp_key = "keybase:aknysh"
-  groups = ["${module.assumed_roles.group_readonly_name}"]
+  groups  = ["${module.assumed_roles.group_readonly_name}"]
   enabled = "false"
 }
