@@ -47,24 +47,29 @@ related:
 
 # Short description of this project
 description: |-
-  Terraform Module to provision a basic IAM user suitable for humans.
+  Terraform Module to provision a basic IAM user suitable for humans. It will establish a login profile and associate the user with IAM groups. 
 
   We do not recommend creating IAM users for any other purpose.
 
 # How to use this project
 usage: |-
+
+
   ```hcl
-  module "circleci" {
+  module "jack" {
     source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
-    name       = "assets"
+    name       = "jack"
+    groups     = ["admins"]
   }
   ```
+  __NOTE:__ We recommend using email addresses for IAM user accounts.
 
 examples: |-
   ```hcl
-  module "joe" {
+  module "jill" {
     source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
-    name      = "fluentd"
+    name      = "jill"
+    groups    = ["engineering"]
   }
 
   ```

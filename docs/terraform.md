@@ -12,7 +12,7 @@
 | password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
 | permissions_boundary | The ARN of the policy that is used to set the permissions boundary for the user | string | `` | no |
-| pgp_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `` | no |
+| pgp_key | Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password. | string | - | yes |
 
 ## Outputs
 

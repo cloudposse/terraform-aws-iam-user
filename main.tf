@@ -17,11 +17,11 @@ resource "aws_iam_user_login_profile" "default" {
 }
 
 resource "aws_iam_user_group_membership" "default" {
-  count  = "${var.enabled == "true" ? 1 : 0}"
+  count  = "${var.enabled == "true" && length(var.groups) > 0 ? 1 : 0}"
   user   = "${aws_iam_user.default.name}"
-  groups = "${var.iam_groups}"
+  groups = ["${var.groups}"]
 }
 
 locals {
-  encrypted_password = "${element(concat(aws_iam_user_login_profile.default.*.encrypted_secret, list("")), 0)}"
+  encrypted_password = "${element(concat(aws_iam_user_login_profile.default.*.encrypted_password, list("")), 0)}"
 }

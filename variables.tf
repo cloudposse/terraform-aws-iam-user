@@ -34,8 +34,7 @@ variable "force_destroy" {
 }
 
 variable "pgp_key" {
-  description = "Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key."
-  default     = ""
+  description = "Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password."
 }
 
 variable "password_reset_required" {

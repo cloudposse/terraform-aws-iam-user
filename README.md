@@ -6,7 +6,7 @@
 # terraform-aws-iam-user [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
-Terraform Module to provision a basic IAM user suitable for humans.
+Terraform Module to provision a basic IAM user suitable for humans. It will establish a login profile and associate the user with IAM groups. 
 
 We do not recommend creating IAM users for any other purpose.
 
@@ -29,12 +29,16 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 ## Usage
 
+
+
 ```hcl
-module "circleci" {
+module "jack" {
   source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
-  name       = "assets"
+  name       = "jack"
+  groups     = ["admins"]
 }
 ```
+__NOTE:__ We recommend using email addresses for IAM user accounts.
 
 
 
@@ -42,9 +46,10 @@ module "circleci" {
 ## Examples
 
 ```hcl
-module "joe" {
+module "jill" {
   source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
-  name      = "fluentd"
+  name      = "jill"
+  groups    = ["engineering"]
 }
 
 ```
@@ -75,7 +80,7 @@ Available targets:
 | password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
 | permissions_boundary | The ARN of the policy that is used to set the permissions boundary for the user | string | `` | no |
-| pgp_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `` | no |
+| pgp_key | Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password. | string | - | yes |
 
 ## Outputs
 
