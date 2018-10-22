@@ -8,7 +8,7 @@
 
 Terraform Module to provision a basic IAM user suitable for humans. It will establish a login profile and associate the user with IAM groups. 
 
-We do not recommend creating IAM users for any other purpose.
+We do not recommend creating IAM users for any other purpose. For external systems (e.g. CI/CD) check out our [`terraform-aws-iam-system-user`](https://github.com/cloudposse/terraform-aws-iam-system-user) module.
 
 
 ---
