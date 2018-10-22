@@ -3,7 +3,7 @@
 
 [![Cloud Posse](https://cloudposse.com/logo-300x69.svg)](https://cloudposse.com)
 
-# terraform-aws-iam-user [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-system-user) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-system-user.svg)](https://github.com/cloudposse/terraform-aws-iam-system-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-iam-user [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-user.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-user) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-user.svg)](https://github.com/cloudposse/terraform-aws-iam-user/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
 Terraform Module to provision a basic IAM user suitable for humans. It will establish a login profile and associate the user with IAM groups. 
