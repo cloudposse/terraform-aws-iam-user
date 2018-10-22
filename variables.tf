@@ -9,7 +9,7 @@ variable "login_profile_enabled" {
 }
 
 variable "name" {
-  description = "Desired name for the IAM user"
+  description = "Desired name for the IAM user. We recommend using email addresses."
 }
 
 variable "path" {

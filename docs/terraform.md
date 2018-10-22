@@ -7,7 +7,7 @@
 | force_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | string | `false` | no |
 | groups | List of IAM user groups this user should belong to in the account | list | `<list>` | no |
 | login_profile_enabled | Whether to create IAM user login profile | string | `true` | no |
-| name | Desired name for the IAM user | string | - | yes |
+| name | Desired name for the IAM user. We recommend using email addresses. | string | - | yes |
 | password_length | The length of the generated password | string | `24` | no |
 | password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
