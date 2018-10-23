@@ -28,8 +28,8 @@ output "pgp_key" {
   value       = "${var.pgp_key}"
 }
 
-# https://stackoverflow.com/questions/36565256/set-the-aws-console-password-for-iam-user-with-terraform
 output "keybase_password_decrypt_command" {
+  # https://stackoverflow.com/questions/36565256/set-the-aws-console-password-for-iam-user-with-terraform
   description = "Command to decrypt the Keybase encrypted password"
   value       = "${local.keybase_password_decrypt_command}"
 }

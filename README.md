@@ -90,8 +90,8 @@ Available targets:
 
 | Name | Description |
 |------|-------------|
-| keybase_password_decrypt_command | https://stackoverflow.com/questions/36565256/set-the-aws-console-password-for-iam-user-with-terraform |
-| keybase_password_pgp_message |  |
+| keybase_password_decrypt_command | Command to decrypt the Keybase encrypted password |
+| keybase_password_pgp_message | PGP encrypted message (e.g. suitable for email exchanges) |
 | pgp_key | PGP key used to encrypt sensitive data for this user |
 | user_arn | The ARN assigned by AWS for this user |
 | user_login_profile_encrypted_password | The encrypted password, base64 encoded |
