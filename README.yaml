@@ -1,0 +1,93 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: terraform-aws-iam-user
+
+# License of this project
+license: "APACHE2"
+
+# Canonical GitHub repo
+github_repo: cloudposse/terraform-aws-iam-user
+
+# Badges to display
+badges:
+  - name: "Build Status"
+    image: "https://travis-ci.org/cloudposse/terraform-aws-iam-user.svg?branch=master"
+    url: "https://travis-ci.org/cloudposse/terraform-aws-iam-user"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-iam-user.svg"
+    url: "https://github.com/cloudposse/terraform-aws-iam-user/releases/latest"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+related:
+  - name: "terraform-aws-iam-assumed-roles"
+    description: "Terraform Module for Assumed Roles on AWS with IAM Groups Requiring MFA"
+    url: "https://github.com/cloudposse/terraform-aws-iam-assumed-roles"
+  - name: "terraform-aws-iam-s3-user"
+    description: "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user read/write/delete access to the objects in an S3 bucket"
+    url: "https://github.com/cloudposse/terraform-aws-iam-s3-user"
+  - name: "terraform-aws-organization-access-group"
+    description: "Terraform module to create an IAM Group and Policy to grant permissions to delegated IAM users in the Organization's master account to access a member account"
+    url: "https://github.com/cloudposse/terraform-aws-organization-access-group"
+  - name: "terraform-aws-ssm-iam-role"
+    description: "Terraform module to provision an IAM role with configurable permissions to access SSM Parameter Store"
+    url: "https://github.com/cloudposse/terraform-aws-ssm-iam-role"
+  - name: "terraform-aws-iam-chamber-user"
+    description: "Terraform module to provision a basic IAM chamber user with access to SSM parameters and KMS key to decrypt secrets, suitable for CI/CD systems (e.g. TravisCI, CircleCI, CodeFresh) or systems which are external to AWS that cannot leverage AWS IAM Instance Profiles"
+    url: "https://github.com/cloudposse/terraform-aws-iam-chamber-user"
+  - name: "terraform-aws-lb-s3-bucket"
+    description: "Terraform module to provision an S3 bucket with built in IAM policy to allow AWS Load Balancers to ship access logs"
+    url: "https://github.com/cloudposse/terraform-aws-lb-s3-bucket"
+
+# Short description of this project
+description: |-
+  Terraform Module to provision a basic IAM user suitable for humans. It will establish a login profile and associate the user with IAM groups. 
+
+  We do not recommend creating IAM users for any other purpose. For external systems (e.g. CI/CD) check out our [`terraform-aws-iam-system-user`](https://github.com/cloudposse/terraform-aws-iam-system-user) module.
+
+# How to use this project
+usage: |-
+
+  First, make sure all users register with [keybase.io](https://keybase.io) to faciliate public key encryption (PKE). 
+  Then use their keybase username to automatically encrypt their AWS secret. It's that easy!
+
+
+  ```hcl
+  module "jack" {
+    source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
+    name       = "jack"
+    pgp_key    = "keybase:jack"
+    groups     = ["admins"]
+  }
+  ```
+  __NOTE:__ We recommend using email addresses for IAM user accounts.
+
+examples: |-
+  ```hcl
+  module "jill" {
+    source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
+    name      = "jill"
+    pgp_key    = "keybase:jill"
+    groups    = ["engineering"]
+  }
+  ```
+
+include:
+  - "docs/targets.md"
+  - "docs/terraform.md"
+
+# Contributors to this project
+contributors:
+  - name: "Erik Osterman"
+    github: "osterman"
+  - name: "Igor Rodionov"
+    github: "goruha"
+  - name: "Andriy Knysh"
+    github: "aknysh"
+
