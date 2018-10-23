@@ -56,6 +56,7 @@ usage: |-
   module "jack" {
     source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
     name       = "jack"
+    pgp_key    = "keybase:jack"
     groups     = ["admins"]
   }
   ```
@@ -66,9 +67,9 @@ examples: |-
   module "jill" {
     source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
     name      = "jill"
+    pgp_key    = "keybase:jill"
     groups    = ["engineering"]
   }
-
   ```
 
 include:

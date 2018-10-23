@@ -35,6 +35,7 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 module "jack" {
   source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
   name       = "jack"
+  pgp_key    = "keybase:jack"
   groups     = ["admins"]
 }
 ```
@@ -49,9 +50,9 @@ __NOTE:__ We recommend using email addresses for IAM user accounts.
 module "jill" {
   source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
   name      = "jill"
+  pgp_key    = "keybase:jill"
   groups    = ["engineering"]
 }
-
 ```
 
 
