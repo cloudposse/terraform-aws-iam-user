@@ -26,6 +26,9 @@ badges:
     url: "https://slack.cloudposse.com"
 
 related:
+  - name: "terraform-aws-iam-assumed-roles"
+    description: "Terraform Module for Assumed Roles on AWS with IAM Groups Requiring MFA"
+    url: "https://github.com/cloudposse/terraform-aws-iam-assumed-roles"
   - name: "terraform-aws-iam-s3-user"
     description: "Terraform module to provision a basic IAM user with permissions to access S3 resources, e.g. to give the user read/write/delete access to the objects in an S3 bucket"
     url: "https://github.com/cloudposse/terraform-aws-iam-s3-user"
