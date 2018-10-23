@@ -30,6 +30,9 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 ## Usage
 
 
+First, make sure all users register with [keybase.io](https://keybase.io) to faciliate public key encryption (PKE). 
+Then use their keybase username to automatically encrypt their AWS secret. It's that easy!
+
 
 ```hcl
 module "jack" {
