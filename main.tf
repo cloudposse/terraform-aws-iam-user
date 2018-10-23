@@ -29,7 +29,7 @@ locals {
 }
 
 data "template_file" "keybase_password_decrypt_command" {
-  template = "${file("${path.module}/keybase_password_decrypt_command.sh")}"
+  template = "${file("${path.module}/templates/keybase_password_decrypt_command.sh")}"
 
   vars = {
     encrypted_password = "${local.encrypted_password}"
@@ -37,7 +37,7 @@ data "template_file" "keybase_password_decrypt_command" {
 }
 
 data "template_file" "keybase_password_pgp_message" {
-  template = "${file("${path.module}/keybase_password_pgp_message.txt")}"
+  template = "${file("${path.module}/templates/keybase_password_pgp_message.txt")}"
 
   vars = {
     encrypted_password = "${local.encrypted_password}"
