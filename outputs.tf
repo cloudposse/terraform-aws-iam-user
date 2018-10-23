@@ -30,18 +30,11 @@ output "pgp_key" {
 
 # https://stackoverflow.com/questions/36565256/set-the-aws-console-password-for-iam-user-with-terraform
 output "keybase_password_decrypt_command" {
-  value = <<__EOF__
-echo "${local.encrypted_password}" | base64 --decode | keybase pgp decrypt
-__EOF__
+  description = "Command to decrypt the Keybase encrypted password"
+  value       = "${local.keybase_password_decrypt_command}"
 }
 
 output "keybase_password_pgp_message" {
-  value = <<__EOF__
------BEGIN PGP MESSAGE-----
-Version: Keybase OpenPGP v2.0.76
-Comment: https://keybase.io/crypto
-
-${local.encrypted_password}
------END PGP MESSAGE-----
-__EOF__
+  description = "PGP encrypted message (e.g. suitable for email exchanges)"
+  value       = "${local.keybase_password_pgp_message}"
 }
