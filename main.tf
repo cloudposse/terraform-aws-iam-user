@@ -14,13 +14,13 @@ resource "aws_iam_user_login_profile" "default" {
   pgp_key                 = "${var.pgp_key}"
   password_length         = "${var.password_length}"
   password_reset_required = "${var.password_reset_required}"
-  depends_on = ["aws_iam_user.default"]
+  depends_on              = ["aws_iam_user.default"]
 }
 
 resource "aws_iam_user_group_membership" "default" {
-  count  = "${var.enabled == "true" && length(var.groups) > 0 ? 1 : 0}"
-  user   = "${aws_iam_user.default.name}"
-  groups = ["${var.groups}"]
+  count      = "${var.enabled == "true" && length(var.groups) > 0 ? 1 : 0}"
+  user       = "${aws_iam_user.default.name}"
+  groups     = ["${var.groups}"]
   depends_on = ["aws_iam_user.default"]
 }
 
