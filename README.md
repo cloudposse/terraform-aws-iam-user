@@ -75,13 +75,13 @@ Available targets:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| enabled | Whether to create the IAM user | string | `true` | no |
-| force_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | string | `false` | no |
-| groups | List of IAM user groups this user should belong to in the account | list | `<list>` | no |
-| login_profile_enabled | Whether to create IAM user login profile | string | `true` | no |
+| enabled | Whether to create the IAM user | bool | `true` | no |
+| force_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | bool | `false` | no |
+| groups | List of IAM user groups this user should belong to in the account | list(string) | `<list>` | no |
+| login_profile_enabled | Whether to create IAM user login profile | bool | `true` | no |
 | name | Desired name for the IAM user. We recommend using email addresses. | string | - | yes |
-| password_length | The length of the generated password | string | `24` | no |
-| password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
+| password_length | The length of the generated password | number | `24` | no |
+| password_reset_required | Whether the user should be forced to reset the generated password on first login. | bool | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
 | permissions_boundary | The ARN of the policy that is used to set the permissions boundary for the user | string | `` | no |
 | pgp_key | Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password. | string | - | yes |
