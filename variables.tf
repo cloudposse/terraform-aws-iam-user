@@ -22,13 +22,13 @@ variable "delimiter" {
 }
 
 variable "attributes" {
-  type        = "list(string)"
+  type        = "list"
   default     = []
   description = "Additional attributes (e.g. `policy` or `role`)"
 }
 
 variable "tags" {
-  type        = "map(string)"
+  type        = "map"
   default     = {}
   description = "Additional tags (e.g. map(`BusinessUnit`,`XYZ`)"
 }
