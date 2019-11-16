@@ -10,12 +10,6 @@ variable "stage" {
   default     = ""
 }
 
-variable "enabled" {
-  type        = bool
-  description = "Set to false to prevent the module from creating any resources"
-  default     = true
-}
-
 variable "name" {
   type        = string
   description = "Name  (e.g. `app` or `cluster`)"
