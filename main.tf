@@ -1,3 +1,14 @@
+module "label" {
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.11/master"
+  enabled    = "${var.enabled}"
+  namespace  = "${var.namespace}"
+  stage      = "${var.stage}"
+  name       = "${var.name}"
+  delimiter  = "${var.delimiter}"
+  attributes = "${var.attributes}"
+  tags       = "${var.tags}"
+}
+
 resource "aws_iam_user" "default" {
   count = "${var.enabled == "true" ? 1 : 0}"
 
@@ -5,6 +16,7 @@ resource "aws_iam_user" "default" {
   path                 = "${var.path}"
   permissions_boundary = "${var.permissions_boundary}"
   force_destroy        = "${var.force_destroy}"
+  tags                 = "${module.label.tags}"
 }
 
 resource "aws_iam_user_login_profile" "default" {
