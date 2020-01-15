@@ -22,7 +22,7 @@ resource "aws_iam_user" "default" {
 resource "aws_iam_user_login_profile" "default" {
   count = var.enabled == true && var.login_profile_enabled == true ? 1 : 0
 
-  user                    = aws_iam_user.default.name
+  user                    = aws_iam_user.default[count.index].name
   pgp_key                 = var.pgp_key
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
@@ -31,7 +31,7 @@ resource "aws_iam_user_login_profile" "default" {
 
 resource "aws_iam_user_group_membership" "default" {
   count      = var.enabled == true && length(var.groups) > 0 ? 1 : 0
-  user       = aws_iam_user.default.name
+  user       = aws_iam_user.default[count.index].name
   groups     = [var.groups]
   depends_on = [aws_iam_user.default]
 }
