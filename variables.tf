@@ -53,7 +53,7 @@ variable "path" {
 
 variable "groups" {
   description = "List of IAM user groups this user should belong to in the account"
-  type        = list
+  type        = list(string)
   default     = []
 }
 
