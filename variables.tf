@@ -4,7 +4,7 @@ variable "login_profile_enabled" {
   default     = true
 }
 
-variable "username" {
+variable "user_name" {
   type        = string
   description = "Desired name for the IAM user. We recommend using email addresses."
 }

@@ -1,7 +1,7 @@
 resource "aws_iam_user" "default" {
   count = var.enabled == true ? 1 : 0
 
-  name                 = var.username
+  name                 = var.user_name
   path                 = var.path
   permissions_boundary = var.permissions_boundary
   force_destroy        = var.force_destroy
