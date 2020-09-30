@@ -1,29 +1,58 @@
+<!-- markdownlint-disable -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.0 |
+| aws | >= 2.0 |
+| null | >= 2.0 |
+| template | >= 2.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | >= 2.0 |
+| template | >= 2.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| enabled | Whether to create the IAM user | string | `true` | no |
-| force_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | string | `false` | no |
-| groups | List of IAM user groups this user should belong to in the account | list | `<list>` | no |
-| login_profile_enabled | Whether to create IAM user login profile | string | `true` | no |
-| name | Desired name for the IAM user. We recommend using email addresses. | string | - | yes |
-| password_length | The length of the generated password | string | `24` | no |
-| password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
-| path | Desired path for the IAM user | string | `/` | no |
-| permissions_boundary | The ARN of the policy that is used to set the permissions boundary for the user | string | `` | no |
-| pgp_key | Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password. | string | - | yes |
+|------|-------------|------|---------|:--------:|
+| additional\_tag\_map | Additional tags for appending to tags\_as\_list\_of\_maps. Not added to `tags`. | `map(string)` | `{}` | no |
+| attributes | Additional attributes (e.g. `1`) | `list(string)` | `[]` | no |
+| context | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional\_tag\_map, which are merged. | <pre>object({<br>    enabled             = bool<br>    namespace           = string<br>    environment         = string<br>    stage               = string<br>    name                = string<br>    delimiter           = string<br>    attributes          = list(string)<br>    tags                = map(string)<br>    additional_tag_map  = map(string)<br>    regex_replace_chars = string<br>    label_order         = list(string)<br>    id_length_limit     = number<br>  })</pre> | <pre>{<br>  "additional_tag_map": {},<br>  "attributes": [],<br>  "delimiter": null,<br>  "enabled": true,<br>  "environment": null,<br>  "id_length_limit": null,<br>  "label_order": [],<br>  "name": null,<br>  "namespace": null,<br>  "regex_replace_chars": null,<br>  "stage": null,<br>  "tags": {}<br>}</pre> | no |
+| delimiter | Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
+| enabled | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
+| environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
+| force\_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
+| groups | List of IAM user groups this user should belong to in the account | `list(string)` | `[]` | no |
+| id\_length\_limit | Limit `id` to this many characters.<br>Set to `0` for unlimited length.<br>Set to `null` for default, which is `0`.<br>Does not affect `id_full`. | `number` | `null` | no |
+| label\_order | The naming order of the id output and Name tag.<br>Defaults to ["namespace", "environment", "stage", "name", "attributes"].<br>You can omit any of the 5 elements, but at least one must be present. | `list(string)` | `null` | no |
+| login\_profile\_enabled | Whether to create IAM user login profile | `bool` | `true` | no |
+| name | Solution name, e.g. 'app' or 'jenkins' | `string` | `null` | no |
+| namespace | Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp' | `string` | `null` | no |
+| password\_length | The length of the generated password | `number` | `24` | no |
+| password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | `bool` | `true` | no |
+| path | Desired path for the IAM user | `string` | `"/"` | no |
+| permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the user | `string` | `""` | no |
+| pgp\_key | Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password. | `string` | n/a | yes |
+| regex\_replace\_chars | Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
+| stage | Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
+| tags | Additional tags (e.g. `map('BusinessUnit','XYZ')` | `map(string)` | `{}` | no |
+| user\_name | Desired name for the IAM user. We recommend using email addresses. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| keybase_password_decrypt_command | Command to decrypt the Keybase encrypted password |
-| keybase_password_pgp_message | PGP encrypted message (e.g. suitable for email exchanges) |
-| pgp_key | PGP key used to encrypt sensitive data for this user |
-| user_arn | The ARN assigned by AWS for this user |
-| user_login_profile_encrypted_password | The encrypted password, base64 encoded |
-| user_login_profile_key_fingerprint | The fingerprint of the PGP key used to encrypt the password |
-| user_name | IAM user name |
-| user_unique_id | The unique ID assigned by AWS |
+| keybase\_password\_decrypt\_command | Command to decrypt the Keybase encrypted password |
+| keybase\_password\_pgp\_message | PGP encrypted message (e.g. suitable for email exchanges) |
+| pgp\_key | PGP key used to encrypt sensitive data for this user |
+| user\_arn | The ARN assigned by AWS for this user |
+| user\_login\_profile\_encrypted\_password | The encrypted password, base64 encoded |
+| user\_login\_profile\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the password |
+| user\_name | IAM user name |
+| user\_unique\_id | The unique ID assigned by AWS |
 
+<!-- markdownlint-restore -->
