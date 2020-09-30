@@ -26,7 +26,7 @@ resource "aws_iam_user_group_membership" "default" {
 }
 
 locals {
-  encrypted_password               = element(concat(aws_iam_user_login_profile.default.*.encrypted_password, list("")), 0)
+  encrypted_password               = join("", aws_iam_user_login_profile.default.*.encrypted_password)
   keybase_password_pgp_message     = data.template_file.keybase_password_pgp_message.rendered
   keybase_password_decrypt_command = data.template_file.keybase_password_decrypt_command.rendered
 }
