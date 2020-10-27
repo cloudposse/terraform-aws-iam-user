@@ -46,8 +46,8 @@
 
 | Name | Description |
 |------|-------------|
-| keybase\_password\_decrypt\_command | Command to decrypt the Keybase encrypted password |
-| keybase\_password\_pgp\_message | PGP encrypted message (e.g. suitable for email exchanges) |
+| keybase\_password\_decrypt\_command | Command to decrypt the Keybase encrypted password. Returns empty string if pgp\_key is not from keybase |
+| keybase\_password\_pgp\_message | PGP encrypted message (e.g. suitable for email exchanges). Returns empty string if pgp\_key is not from keybase |
 | pgp\_key | PGP key used to encrypt sensitive data for this user |
 | user\_arn | The ARN assigned by AWS for this user |
 | user\_login\_profile\_encrypted\_password | The encrypted password, base64 encoded |
