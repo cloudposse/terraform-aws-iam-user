@@ -30,11 +30,11 @@ output "pgp_key" {
 
 output "keybase_password_decrypt_command" {
   # https://stackoverflow.com/questions/36565256/set-the-aws-console-password-for-iam-user-with-terraform
-  description = "Command to decrypt the Keybase encrypted password"
+  description = "Command to decrypt the Keybase encrypted password. Returns empty string if pgp_key is not from keybase"
   value       = local.keybase_password_decrypt_command
 }
 
 output "keybase_password_pgp_message" {
-  description = "PGP encrypted message (e.g. suitable for email exchanges)"
+  description = "PGP encrypted message (e.g. suitable for email exchanges). Returns empty string if pgp_key is not from keybase"
   value       = local.keybase_password_pgp_message
 }
