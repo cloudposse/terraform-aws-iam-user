@@ -60,7 +60,9 @@ usage: |-
 
   ```hcl
   module "jack" {
-    source     = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
+    source = "cloudposse/iam-user/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
     name       = "jack"
     pgp_key    = "keybase:jack"
     groups     = ["admins"]
@@ -71,7 +73,9 @@ usage: |-
 examples: |-
   ```hcl
   module "jill" {
-    source    = "git::https://github.com/cloudposse/terraform-aws-iam-user.git?ref=master"
+    source = "cloudposse/iam-user/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
     name      = "jill"
     pgp_key    = "keybase:jill"
     groups    = ["engineering"]
