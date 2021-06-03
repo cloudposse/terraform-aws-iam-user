@@ -64,6 +64,7 @@ usage: |-
     # Cloud Posse recommends pinning every module to a specific version
     # version     = "x.x.x"
     name       = "jack"
+    user_name  = "jack@companyname.com"
     pgp_key    = "keybase:jack"
     groups     = ["admins"]
   }
@@ -77,6 +78,7 @@ examples: |-
     # Cloud Posse recommends pinning every module to a specific version
     # version     = "x.x.x"
     name      = "jill"
+    user_name  = "jill@companyname.com"
     pgp_key    = "keybase:jill"
     groups    = ["engineering"]
   }
