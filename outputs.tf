@@ -38,3 +38,8 @@ output "keybase_password_pgp_message" {
   description = "PGP encrypted message (e.g. suitable for email exchanges). Returns empty string if pgp_key is not from keybase"
   value       = local.keybase_password_pgp_message
 }
+
+output "user_login_profile_decrypted_password_file" {
+  value       = abspath(local.user_password_file_path)
+  description = "The decrypted password string. Not empty when password_encrypted set to false."
+}

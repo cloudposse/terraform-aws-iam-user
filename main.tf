@@ -9,13 +9,48 @@ resource "aws_iam_user" "default" {
 }
 
 resource "aws_iam_user_login_profile" "default" {
-  count = module.this.enabled && var.login_profile_enabled == true ? 1 : 0
+  count = module.this.enabled && var.login_profile_enabled && var.password_encrypted ? 1 : 0
 
   user                    = aws_iam_user.default[count.index].name
   pgp_key                 = var.pgp_key
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
   depends_on              = [aws_iam_user.default]
+}
+
+resource "random_password" "password" {
+  count  = module.this.enabled && var.password_encrypted == false ? 1 : 0
+  length = var.password_length
+  special = false
+}
+
+locals {
+  aws_cli_command         = length(var.aws_cli_profile) > 0 ? "${var.aws_cli_command} --profile ${var.aws_cli_profile}" : var.aws_cli_command
+  user_password           = length(var.decrypted_password) > 0 ? var.decrypted_password : join("",random_password.password.*.result)
+  user_password_file_path = "${path.module}/${var.user_name}_password.txt"
+  password_reset_required = var.password_reset_required ? "--password-reset-required" : "--no-password-reset-required"
+  set_password_script     = <<EOF
+  #!/bin/bash
+  ${local.aws_cli_command} iam create-login-profile --user-name ${var.user_name} --password ${local.user_password} ${local.password_reset_required}
+EOF
+}
+
+resource "null_resource" "deploy" {
+  count = module.this.enabled && var.password_encrypted == false ? 1 : 0
+
+  triggers = {
+    user_unique_id = join("",aws_iam_user.default.*.unique_id)
+  }
+
+  provisioner "local-exec" {
+    command     = local.set_password_script
+    interpreter = var.bash_interpreter
+  }
+}
+
+resource "local_file" "password_file" {
+  content  = local.user_password
+  filename = local.user_password_file_path
 }
 
 resource "aws_iam_user_group_membership" "default" {

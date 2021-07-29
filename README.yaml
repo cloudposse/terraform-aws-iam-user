@@ -83,6 +83,18 @@ examples: |-
     groups    = ["engineering"]
   }
   ```
+  ```hcl
+  module "jill" {
+    source = "cloudposse/iam-user/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
+    name      = "jill"
+    user_name  = "jill@companyname.com"
+    groups    = ["engineering"]
+    password_encrypted = false
+    decrypted_password = "P@$w0rd"
+  }
+  ```
 
 include:
   - "docs/targets.md"
