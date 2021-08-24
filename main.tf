@@ -19,14 +19,14 @@ resource "aws_iam_user_login_profile" "default" {
 }
 
 resource "random_password" "password" {
-  count  = module.this.enabled && var.password_encrypted == false ? 1 : 0
-  length = var.password_length
+  count   = module.this.enabled && var.password_encrypted == false ? 1 : 0
+  length  = var.password_length
   special = false
 }
 
 locals {
   aws_cli_command         = length(var.aws_cli_profile) > 0 ? "${var.aws_cli_command} --profile ${var.aws_cli_profile}" : var.aws_cli_command
-  user_password           = length(var.decrypted_password) > 0 ? var.decrypted_password : join("",random_password.password.*.result)
+  user_password           = length(var.decrypted_password) > 0 ? var.decrypted_password : join("", random_password.password.*.result)
   user_password_file_path = "${path.module}/${var.user_name}_password.txt"
   password_reset_required = var.password_reset_required ? "--password-reset-required" : "--no-password-reset-required"
   set_password_script     = <<EOF
@@ -39,7 +39,7 @@ resource "null_resource" "deploy" {
   count = module.this.enabled && var.password_encrypted == false ? 1 : 0
 
   triggers = {
-    user_unique_id = join("",aws_iam_user.default.*.unique_id)
+    user_unique_id = join("", aws_iam_user.default.*.unique_id)
   }
 
   provisioner "local-exec" {
