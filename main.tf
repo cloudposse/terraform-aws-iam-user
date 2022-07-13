@@ -28,24 +28,6 @@ resource "aws_iam_user_group_membership" "default" {
 locals {
   encrypted_password               = join("", aws_iam_user_login_profile.default.*.encrypted_password)
   pgp_key_is_keybase               = length(regexall("keybase:", var.pgp_key)) > 0 ? true : false
-  keybase_password_pgp_message     = join("", data.template_file.keybase_password_pgp_message.*.rendered)
-  keybase_password_decrypt_command = join("", data.template_file.keybase_password_decrypt_command.*.rendered)
-}
-
-data "template_file" "keybase_password_decrypt_command" {
-  count    = local.pgp_key_is_keybase ? 1 : 0
-  template = file("${path.module}/templates/keybase_password_decrypt_command.sh")
-
-  vars = {
-    encrypted_password = local.encrypted_password
-  }
-}
-
-data "template_file" "keybase_password_pgp_message" {
-  count    = local.pgp_key_is_keybase ? 1 : 0
-  template = file("${path.module}/templates/keybase_password_pgp_message.txt")
-
-  vars = {
-    encrypted_password = local.encrypted_password
-  }
+  keybase_password_pgp_message     = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_pgp_message.txt", { encrypted_password = local.encrypted_password }) : ""
+  keybase_password_decrypt_command = local.pgp_key_is_keybase ? templatefile("${path.module}/templates/keybase_password_decrypt_command.sh", { encrypted_password = local.encrypted_password }) : ""
 }
