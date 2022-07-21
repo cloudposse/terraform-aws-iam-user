@@ -16,6 +16,10 @@ resource "aws_iam_user_login_profile" "default" {
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
   depends_on              = [aws_iam_user.default]
+
+  lifecycle {
+    ignore_changes = [password_reset_required]
+  }
 }
 
 resource "aws_iam_user_group_membership" "default" {
