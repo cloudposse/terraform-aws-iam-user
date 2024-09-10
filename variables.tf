@@ -49,3 +49,21 @@ variable "password_length" {
   description = "The length of the generated password"
   default     = 24
 }
+
+variable "ssh_key_enabled" {
+  description = "Whether to upload a public ssh key to the IAM user."
+  type        = bool
+  default     = false
+}
+
+variable "ssh_key_encoding" {
+  description = "The SSH key format. Valid options: SSH, PEM. The SSH format only accepts an RSA key: ssh-keygen -t rsa."
+  type        = string
+  default     = "SSH"
+}
+
+variable "ssh_public_key" {
+  description = "The actual SSH public key."
+  type        = string
+  default     = ""
+}
