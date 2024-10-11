@@ -22,6 +22,14 @@ resource "aws_iam_user_login_profile" "default" {
   }
 }
 
+resource "aws_iam_user_ssh_key" "default" {
+  count = module.this.enabled && var.ssh_key_enabled == true ? 1 : 0
+
+  username   = aws_iam_user.default[count.index].name
+  encoding   = var.ssh_key_encoding
+  public_key = var.ssh_public_key
+}
+
 resource "aws_iam_user_group_membership" "default" {
   count      = module.this.enabled && length(var.groups) > 0 ? 1 : 0
   user       = aws_iam_user.default[count.index].name
